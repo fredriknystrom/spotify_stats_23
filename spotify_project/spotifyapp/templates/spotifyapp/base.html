@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Website{% endblock %}</title>
+    <!-- Bootstrap CSS and JS -->
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">My Website</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'song-search' %}">Search for Songs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'artist-search' %}">Search for Artists</a>
+                        </li>
+                        <!-- Add additional navigation links here -->
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <main class="container mt-4">
+        {% block content %}
+        <!-- Content from child templates will be placed here -->
+        {% endblock %}
+    </main>
+    
+    <footer class="bg-light py-3 mt-4">
+        <div class="container">
+            <div class="text-center mt-4">
+                <p class="mb-1">Created by:</p>
+                <p class="font-weight-bold">Fredrik Nyström</p>
+                <p class="mb-0">Contact: <a href="mailto:youremail@gmail.com">fredriknystroms@gmail.com</a></p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
