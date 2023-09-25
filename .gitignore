@@ -39,3 +39,6 @@ custom_file.ext
 
 
 __init__.py
+
+# Ignore migrations
+migrations
