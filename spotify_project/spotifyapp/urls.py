@@ -1,7 +1,9 @@
 from django.urls import path
-from . import views
+from spotifyapp.views import artist, song
 
 urlpatterns = [
-    path('search-song/', views.song_search, name='song-search'),
-    path('search-artist/', views.artist_search, name='artist-search'),
+    path('song-search/', song.SongSearchView.as_view(), name='song-search'),
+    path('artist-search/', artist.ArtistSearchView.as_view(), name='artist-search'),
+    path('artist-info/<str:artist_name>/', artist.ArtistInfoView.as_view(), name='artist-info'),
+    path('song-info/<int:song_pk>/', song.SongInfoView.as_view(), name='song-info'),
 ]

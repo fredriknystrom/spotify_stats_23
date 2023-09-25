@@ -1,0 +1,47 @@
+<!-- song_info.html -->
+
+{% extends "spotifyapp/base.html" %}
+
+{% block title %}Song Information: {{ song.title }}{% endblock %}
+
+{% block content %}
+<h1>Song Information</h1>
+<h2>{{ song.title }}</h2>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <td>Artist</td>
+            <td>
+                {% if song.artists.all %}
+                    {% for artist in song.artists.all %}{{ artist.name }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                {% else %}
+                    No artists found
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td>Spotify Ranking</td>
+            <td>{{ song.in_spotify_charts }}</td>
+        </tr>
+        <tr>
+            <td>Spotify Playlists</td>
+            <td>{{ song.in_spotify_playlists }}</td>
+        </tr>
+        <tr>
+            <td>Streams</td>
+            <td>{{ song.streams }}</td>
+        </tr>
+        <tr>
+            <td>BPM</td>
+            <td>{{ song.bpm }}</td>
+        </tr>
+        <tr>
+            <td>Released Year</td>
+            <td>{{ song.released_year }}</td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock %}

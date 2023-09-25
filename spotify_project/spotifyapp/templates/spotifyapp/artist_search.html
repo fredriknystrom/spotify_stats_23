@@ -1,0 +1,23 @@
+{% extends "spotifyapp/base.html" %}
+
+{% block title %}Artist Search{% endblock %}
+
+{% block content %}
+<h1>Artist Search Page</h1>
+<form method="get" action="">
+    {{ filter.form }} {# Include the filter form here #}
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+{% if filter.qs %}
+    <h2>Search Results:</h2>
+    <ul class="list-group">
+        {% for artist in filter.qs %}
+        <li class="list-group-item">
+            <a href="{% url 'artist-info' artist.name %}">{{ artist.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+
+{% endblock %}

@@ -14,6 +14,7 @@ PERCENTAGE_CHOICES = (
 )
 
 class SpotifyStats(models.Model):
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=255)
     artists = models.ManyToManyField(Artist)
     released_year = models.PositiveIntegerField()
