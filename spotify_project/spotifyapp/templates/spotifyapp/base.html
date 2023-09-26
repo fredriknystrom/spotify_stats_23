@@ -8,10 +8,14 @@
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
+    <!-- Include static CSS files -->
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+
 </head>
-<body>
+<body class="bg-grey">
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-spotify-green">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{% url 'song-search' %}">SpotiStats</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,18 +38,19 @@
         </nav>
     </header>
     
-    <main class="container mt-4">
+    <main class="container bg-grey mt-4">
         {% block content %}
         <!-- Content from child templates will be placed here -->
         {% endblock %}
     </main>
     
-    <footer class="bg-light py-3 mt-4">
+    <footer class="bg-black py-3 mt-4">
         <div class="container">
             <div class="text-center mt-4">
-                <p class="mb-1">Created by:</p>
-                <p class="font-weight-bold">Fredrik Nyström</p>
-                <p class="mb-0">Contact: <a href="mailto:youremail@gmail.com">fredriknystroms@gmail.com</a></p>
+                <p class="mb-1 text-spotify-green">Created by:</p>
+                <p class="font-weight-bold text-spotify-green">Fredrik Nyström</p>
+                <p class="mb-0 text-spotify-green">Contact: <a href="mailto:youremail@gmail.com">fredriknystroms@gmail.com</a></p>
+
             </div>
         </div>
     </footer>

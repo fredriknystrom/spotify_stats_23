@@ -8,6 +8,14 @@ class SongSearchView(FilterView):
     filterset_class = SongFilter
     template_name = 'spotifyapp/song_search.html'
 
+    def get_queryset(self):
+        # Get the queryset based on the filter settings
+        queryset = super().get_queryset()
+
+        # Order the queryset by the "streams" field in ascending order
+        queryset = queryset.order_by('streams')
+
+        return queryset
 
 class SongInfoView(DetailView):
     model = SpotifyStats

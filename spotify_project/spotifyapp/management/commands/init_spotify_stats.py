@@ -3,6 +3,7 @@
 import csv
 from django.core.management.base import BaseCommand
 from spotifyapp.models import SpotifyStats, Artist
+from datetime import datetime
 
 class Command(BaseCommand):
     help = 'Initialize SpotifyStats data from a CSV file'
@@ -17,6 +18,10 @@ class Command(BaseCommand):
             return 2
         else:
             return 3
+        
+    def create_datetime(self, year, month, day):
+        return datetime(int(year), int(month), int(day))
+
 
     def handle(self, *args, **kwargs):
         csv_file = kwargs['csv_file']
@@ -35,9 +40,7 @@ class Command(BaseCommand):
                 # Create the SpotifyStats record with associated artists and assigned labels
                 spotify_stats = SpotifyStats.objects.create(
                     title=row['track_name'],
-                    released_year=row['released_year'],
-                    released_month=row['released_month'],
-                    released_day=row['released_day'],
+                    released_date=self.create_datetime(row['released_year'], row['released_month'], row['released_day']),
                     in_spotify_playlists=row['in_spotify_playlists'],
                     in_spotify_charts=row['in_spotify_charts'],
                     streams=row['streams'],

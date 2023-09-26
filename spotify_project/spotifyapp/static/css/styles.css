@@ -1,0 +1,23 @@
+.nav-item a:hover {
+    text-decoration: underline;
+}
+
+.bg-spotify-green{
+    background-color: #1DB954;
+}
+
+.text-spotify-green{
+    color: #1DB954;
+}
+
+.bg-black {
+    background-color: #191414;
+}
+
+.bg-grey {
+    background-color: #333333;
+}
+
+.text-white {
+    color: #ffffff;
+}

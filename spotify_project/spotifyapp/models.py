@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.utils import timezone
 
 class Artist(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -17,9 +17,7 @@ class SpotifyStats(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=255)
     artists = models.ManyToManyField(Artist)
-    released_year = models.PositiveIntegerField()
-    released_month = models.PositiveIntegerField()
-    released_day = models.PositiveIntegerField()
+    released_date = models.DateField(default=timezone.now)
     in_spotify_playlists = models.PositiveIntegerField()
     in_spotify_charts = models.PositiveIntegerField()
     streams = models.PositiveIntegerField()
