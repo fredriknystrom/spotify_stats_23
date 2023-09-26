@@ -50,3 +50,14 @@ h1, h2, h3, h4 {
     color: #ffffff;
 }
 
+.horizontal-form-row {
+    display: flex;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.horizontal-form-row .form-group {
+    flex: 1;
+    margin: 0 15px;
+}
+

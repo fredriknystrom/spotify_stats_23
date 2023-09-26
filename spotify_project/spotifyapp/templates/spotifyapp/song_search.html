@@ -4,18 +4,6 @@
 
 {% block content %}
 <h1>Song Search Page</h1>
-<style>
-    .horizontal-form-row {
-        display: flex;
-        margin-right: -15px;
-        margin-left: -15px;
-    }
-
-    .horizontal-form-row .form-group {
-        flex: 1;
-        margin: 0 15px;
-    }
-</style>
 
 <form method="get" action="">
     <div class="horizontal-form-row">
@@ -55,10 +43,10 @@
             <h2>Songs</h2>
             <ul class="list-group">
                 {% for song in filter.qs %}
-                <li class="list-group-item bg-light-grey text-spotify-green">
+                <li class="list-group-item bg-light-grey text-spotify-green d-flex justify-content-between">
                     <a class="text-white no-underline" href="{% url 'song-info' song.id %}">{{ song.title }}</a>
-                    {{ song.streams }}
-                </li>
+                    <span>{{ song.streams }}</span>
+                </li>                
                 {% endfor %}
             </ul>
         {% endif %}

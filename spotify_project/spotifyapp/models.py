@@ -7,16 +7,30 @@ class Artist(models.Model):
     def __str__(self):
         return self.name
     
-    def total_streams(self):
-        # Initialize a variable to store the total streams
+    def total_million_streams(self):
         total = 0
-
-        # Iterate through all SpotifyStats records associated with this artist
         for spotify_stat in self.spotifystats_set.all():
-            # Add the streams of each SpotifyStats record to the total
             total += spotify_stat.streams
 
-        return total
+        return round(total/100000)
+    
+    def low_medium_high_counts(self, field_name):
+        # Initialize counters for low, medium, and high
+        low_count = 0
+        medium_count = 0
+        high_count = 0
+
+        # Iterate through the related SpotifyStats objects
+        for spotify_stat in self.spotifystats_set.all():
+            value = getattr(spotify_stat, field_name)
+            if value == 1:
+                low_count += 1
+            elif value == 2:
+                medium_count += 1
+            elif value == 3:
+                high_count += 1
+
+        return [low_count, medium_count, high_count]
 
 PERCENTAGE_CHOICES = (
     (1, 'Low'),

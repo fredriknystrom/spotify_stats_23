@@ -3,6 +3,7 @@ from spotifyapp.models import SpotifyStats
 from django.views.generic import ListView
 from django_filters.views import FilterView
 from spotifyapp.filters.artist_filter import ArtistFilter
+from spotifyapp.utlis import create_low_medium_high_pie_plot
 
 class ArtistSearchView(FilterView):
     model = Artist
@@ -28,4 +29,8 @@ class ArtistInfoView(ListView):
         context['artist_name'] = artist_name
         artist = Artist.objects.get(name=artist_name)
         context['artist'] = artist
+        context['dance'] = create_low_medium_high_pie_plot(artist.low_medium_high_counts('danceability_percentage'))
+        context['energy'] = create_low_medium_high_pie_plot(artist.low_medium_high_counts('energy_percentage'))
+        context['acoustic'] = create_low_medium_high_pie_plot(artist.low_medium_high_counts('acousticness_percentage'))
+        context['speech'] = create_low_medium_high_pie_plot(artist.low_medium_high_counts('speechiness_percentage'))
         return context
