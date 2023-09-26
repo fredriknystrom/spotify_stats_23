@@ -20,10 +20,12 @@ class ArtistInfoView(ListView):
         artist_name = self.kwargs.get('artist_name')
    
         # Retrieve all SpotifyStats records related to the artist
-        return SpotifyStats.objects.filter(artists__name=artist_name)
+        return SpotifyStats.objects.filter(artists__name=artist_name).order_by('-streams')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         artist_name = self.kwargs.get('artist_name')
-        context['artist_name'] = artist_name  # Add the artist's name to the context
+        context['artist_name'] = artist_name
+        artist = Artist.objects.get(name=artist_name)
+        context['artist'] = artist
         return context

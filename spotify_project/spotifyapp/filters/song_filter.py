@@ -8,7 +8,9 @@ class SongFilter(django_filters.FilterSet):
         label="Title",
         lookup_expr='icontains',
         widget=forms.TextInput(
-        attrs={ "class":"form-control"}
+        attrs={ "class":"form-control",
+               "placeholder": "Enter song title..."
+               }
         )
     )
 

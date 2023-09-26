@@ -6,6 +6,17 @@ class Artist(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def total_streams(self):
+        # Initialize a variable to store the total streams
+        total = 0
+
+        # Iterate through all SpotifyStats records associated with this artist
+        for spotify_stat in self.spotifystats_set.all():
+            # Add the streams of each SpotifyStats record to the total
+            total += spotify_stat.streams
+
+        return total
 
 PERCENTAGE_CHOICES = (
     (1, 'Low'),
@@ -28,4 +39,4 @@ class SpotifyStats(models.Model):
     speechiness_percentage = models.PositiveSmallIntegerField(choices=PERCENTAGE_CHOICES)
 
     def __str__(self):
-        return f"{self.title}, {self.artists}"
+        return f"{self.title}, {self.artists} {self.in_spotify_charts}"

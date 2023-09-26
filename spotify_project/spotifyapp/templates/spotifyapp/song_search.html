@@ -44,22 +44,30 @@
             {{ filter.form.speechiness_percentage }}
         </div>
     </div>
-    <button type="submit" class="btn btn-primary mt-2">Search</button>
+    <button type="submit" class="btn btn-primary my-3">Search</button>
 </form>
 
 
-
-{% if filter.qs %}
-    <h2>Songs:</h2>
-    <ul class="list-group">
-        {% for song in filter.qs %}
-        <li class="list-group-item">
-            <a href="{% url 'song-info' song.id %}">{{ song.title }}</a>
-            {{ song.streams }}
-        </li>
-        {% endfor %}
-    </ul>
-{% endif %}
+<div class="row">
+    <!-- Left Column (Table) -->
+    <div class="col-md-6">
+        {% if filter.qs %}
+            <h2>Songs</h2>
+            <ul class="list-group">
+                {% for song in filter.qs %}
+                <li class="list-group-item bg-light-grey text-spotify-green">
+                    <a class="text-white no-underline" href="{% url 'song-info' song.id %}">{{ song.title }}</a>
+                    {{ song.streams }}
+                </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+            <!-- Right Column (Other Content) -->
+    <div class="col-md-6">
+        <h2>Stats</h2>
+    </div>
+</div>
 
 
 {% endblock %}

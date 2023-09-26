@@ -13,7 +13,7 @@ class SongSearchView(FilterView):
         queryset = super().get_queryset()
 
         # Order the queryset by the "streams" field in ascending order
-        queryset = queryset.order_by('streams')
+        queryset = queryset.order_by('-streams')
 
         return queryset
 

@@ -1,5 +1,29 @@
+body {
+    color: #ffffff;
+}
+
+h1, h2, h3, h4 {
+    color: #ffffff;
+}
+
 .nav-item a:hover {
     text-decoration: underline;
+}
+
+.no-underline {
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: #1DB954;
+    color: #444444;
+    border-color: #1DB954;
+}
+
+.btn-primary:hover {
+    background-color: #444444;
+    color: #1DB954;
+    border-color: #444444;
 }
 
 .bg-spotify-green{
@@ -11,13 +35,18 @@
 }
 
 .bg-black {
-    background-color: #191414;
+    background-color: #15151515;
 }
 
 .bg-grey {
-    background-color: #333333;
+    background-color: #222222;
+}
+
+.bg-light-grey {
+    background-color: #444444;
 }
 
 .text-white {
     color: #ffffff;
 }
+

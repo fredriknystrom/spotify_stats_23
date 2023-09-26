@@ -1,47 +1,52 @@
-<!-- song_info.html -->
-
 {% extends "spotifyapp/base.html" %}
 
 {% block title %}Song Information: {{ song.title }}{% endblock %}
 
 {% block content %}
-<h1>Song Information</h1>
-<h2>{{ song.title }}</h2>
+<h1>{{ song.title }} 
+    - 
+   {% if song.artists.all %}
+       {% for artist in song.artists.all %}
+           <span class="text-spotify-green">{{ artist.name }}</span>{% if not forloop.last %}, {% endif %}
+       {% endfor %}
+   {% else %}
+       No artists found
+   {% endif %}
+</h1>
 
-<table class="table">
-    <tbody>
-        <tr>
-            <td>Artist</td>
-            <td>
-                {% if song.artists.all %}
-                    {% for artist in song.artists.all %}{{ artist.name }}{% if not forloop.last %}, {% endif %}
-                    {% endfor %}
-                {% else %}
-                    No artists found
-                {% endif %}
-            </td>
-        </tr>
-        <tr>
-            <td>Spotify Ranking</td>
-            <td>{{ song.in_spotify_charts }}</td>
-        </tr>
-        <tr>
-            <td>Spotify Playlists</td>
-            <td>{{ song.in_spotify_playlists }}</td>
-        </tr>
-        <tr>
-            <td>Streams</td>
-            <td>{{ song.streams }}</td>
-        </tr>
-        <tr>
-            <td>BPM</td>
-            <td>{{ song.bpm }}</td>
-        </tr>
-        <tr>
-            <td>Released Year</td>
-            <td>{{ song.released_year }}</td>
-        </tr>
-    </tbody>
-</table>
+<div class="row">
+    <!-- Left Column (Table) -->
+    <div class="col-md-6">
+        <table class="table text-white bg-light-grey">
+            <tbody>
+                <tr>
+                    <td>Spotify Ranking</td>
+                    <td>#{{ song.in_spotify_charts }}</td>
+                </tr>
+                <tr>
+                    <td>Spotify Playlists</td>
+                    <td>{{ song.in_spotify_playlists }}</td>
+                </tr>
+                <tr>
+                    <td>Streams</td>
+                    <td>{{ song.streams }}</td>
+                </tr>
+                <tr>
+                    <td>BPM</td>
+                    <td>{{ song.bpm }}</td>
+                </tr>
+                <tr>
+                    <td>Release Date</td>
+                    <td>{{ song.released_date }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Right Column (Other Content) -->
+    <div class="col-md-6">
+        <!-- Add your other content here -->
+    </div>
+</div>
 
 {% endblock %}
