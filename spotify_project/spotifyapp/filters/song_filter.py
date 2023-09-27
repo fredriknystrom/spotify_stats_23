@@ -5,7 +5,7 @@ from django import forms
 class SongFilter(django_filters.FilterSet):
     title = django_filters.CharFilter(
         label="Title",
-        lookup_expr='icontains',
+        lookup_expr='istartswith',
         widget=forms.TextInput(
         attrs={ "class":"form-control",
                "placeholder": "Enter song title..."
