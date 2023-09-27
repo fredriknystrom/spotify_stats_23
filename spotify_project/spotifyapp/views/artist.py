@@ -4,11 +4,29 @@ from django.views.generic import ListView
 from django_filters.views import FilterView
 from spotifyapp.filters.artist_filter import ArtistFilter
 from spotifyapp.utlis import create_low_medium_high_pie_plot
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 class ArtistSearchView(FilterView):
     model = Artist
     filterset_class = ArtistFilter
     template_name = 'spotifyapp/artist_search.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Paginate the queryset
+        page = self.request.GET.get('page')
+        paginator = Paginator(context['filter'].qs, 15)
+        try:
+            artists = paginator.page(page)
+        except PageNotAnInteger:
+            artists = paginator.page(1)
+        except EmptyPage:
+            artists = paginator.page(paginator.num_pages)
+
+        context['artists'] = artists
+        return context
+
 
 
 class ArtistInfoView(ListView):

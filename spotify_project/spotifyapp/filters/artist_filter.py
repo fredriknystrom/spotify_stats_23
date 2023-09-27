@@ -9,7 +9,7 @@ class ArtistFilter(django_filters.FilterSet):
         widget=forms.TextInput(
         attrs={ "class":"form-control",
                "placeholder": "Enter artist here...",
-               "style": "width: 500px;"}
+               "style": "width: 636px;"}
         )
     )
 

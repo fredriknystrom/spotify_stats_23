@@ -1,7 +1,6 @@
 import django_filters
 from spotifyapp.models import SpotifyStats
 from django import forms
-from django_filters.widgets import RangeWidget
 
 class SongFilter(django_filters.FilterSet):
     title = django_filters.CharFilter(
@@ -46,14 +45,14 @@ class SongFilter(django_filters.FilterSet):
     )
 
     acousticness_percentage = django_filters.ChoiceFilter(
-        label="Aucustic Sound",
+        label="Acoustic Sound",
         choices=OPTIONS,
         lookup_expr='exact',  # Use 'exact' to match the selected choice exactly
         widget=forms.Select(attrs={'class': 'form-control'}),
     )
 
     speechiness_percentage = django_filters.ChoiceFilter(
-        label="Spooken Words",
+        label="Spoken Words",
         choices=OPTIONS,
         lookup_expr='exact',  # Use 'exact' to match the selected choice exactly
         widget=forms.Select(attrs={'class': 'form-control'}),

@@ -5,19 +5,50 @@
 {% block content %}
 <h1>Artist Search Page</h1>
 <form method="get" action="">
+    <!-- Modify your form to include filter parameters as hidden fields -->
+    <input type="hidden" name="name" value="{{ filter.form.name.value }}">
+    <!-- Add more hidden fields for other filter parameters as needed -->
+
     {{ filter.form }} {# Include the filter form here #}
     <button type="submit" class="btn btn-primary my-3">Search</button>
 </form>
-{% if filter.qs %}
-    <h2>Artists</h2>
-    <ul class="list-group">
-        {% for artist in filter.qs %}
-        <li class="list-group-item bg-light-grey">
-            <a class="text-white no-underline" href="{% url 'artist-info' artist.name %}">{{ artist.name }} - {{ artist.total_streams }}</a>
-        </li>
-        {% endfor %}
-    </ul>
-{% endif %}
 
+<div class="row">
+    <!-- Left Column -->
+    <div class="col-md-6">
+        {% if artists %}
+        <h2>Artists</h2>
+        <ul class="list-group">
+            {% for artist in artists %}
+            <li class="list-group-item bg-light-grey">
+                <a class="text-white no-underline" href="{% url 'artist-info' artist.name %}">{{ artist.name }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        
+        <!-- Pagination links -->
+        <div class="pagination mt-1 justify-content-center">
+            <span class="step-links">
+                {% if artists.has_previous %}
+                <a class="btn btn-primary" href="?page=1{% if filter.form.name.value %}&name={{ filter.form.name.value }}{% endif %}{# Add more filter fields as needed #}">&laquo; First</a>
+                <a class="btn btn-primary" href="?page={{ artists.previous_page_number }}{% if filter.form.name.value %}&name={{ filter.form.name.value }}{% endif %}{# Add more filter fields as needed #}">Previous</a>
+                {% endif %}
+                
+                <span class="current-page text-spotify-green">Page {{ artists.number }} of {{ artists.paginator.num_pages }}</span>
+                
+                {% if artists.has_next %}
+                <a class="btn btn-primary" href="?page={{ artists.next_page_number }}{% if filter.form.name.value %}&name={{ filter.form.name.value }}{% endif %}{# Add more filter fields as needed #}">Next</a>
+                <a class="btn btn-primary" href="?page={{ artists.paginator.num_pages }}{% if filter.form.name.value %}&name={{ filter.form.name.value }}{% endif %}{# Add more filter fields as needed #}">Last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Right Column -->
+    <div class="col-md-6">
+        <h2>Right side</h2>
+    </div>
+</div>
 
 {% endblock %}

@@ -3,6 +3,8 @@ from django_filters.views import FilterView
 from spotifyapp.models import SpotifyStats
 from spotifyapp.filters.song_filter import SongFilter
 
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 class SongSearchView(FilterView):
     model = SpotifyStats
     filterset_class = SongFilter
@@ -12,10 +14,27 @@ class SongSearchView(FilterView):
         # Get the queryset based on the filter settings
         queryset = super().get_queryset()
 
-        # Order the queryset by the "streams" field in ascending order
+        # Order the queryset by the "streams" field in descending order
         queryset = queryset.order_by('-streams')
 
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Paginate the queryset
+        page = self.request.GET.get('page')
+        paginator = Paginator(context['filter'].qs, 15)
+        try:
+            songs = paginator.page(page)
+        except PageNotAnInteger:
+            songs = paginator.page(1)
+        except EmptyPage:
+            songs = paginator.page(paginator.num_pages)
+
+        context['songs'] = songs
+        return context
+
 
 class SongInfoView(DetailView):
     model = SpotifyStats

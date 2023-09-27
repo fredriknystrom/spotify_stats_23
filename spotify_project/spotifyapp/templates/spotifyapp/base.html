@@ -30,25 +30,24 @@
         <header>
             <nav class="navbar navbar-expand-lg navbar-light bg-spotify-green">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="{% url 'song-search' %}">SpotiStats</a>
+                    <a class="navbar-brand" href="{% url 'song-search' %}" style="font-size: 32px;">SpotiStats</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
+                    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                        <ul class="navbar-nav" style="font-size: 24px;">
                             <li class="nav-item">
-                                <a class="nav-link{% if request.resolver_match.url_name == 'song-search' %} active{% endif %}" href="{% url 'song-search' %}">Search for Songs</a>
+                                <a class="nav-link{% if request.resolver_match.url_name == 'song-search' %} active{% endif %}" href="{% url 'song-search' %}">Songs</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link{% if request.resolver_match.url_name == 'artist-search' %} active{% endif %}" href="{% url 'artist-search' %}">Search for Artists</a>
+                                <a class="nav-link{% if request.resolver_match.url_name == 'artist-search' %} active{% endif %}" href="{% url 'artist-search' %}">Artists</a>
                             </li>
-                            <!-- Add additional navigation links here -->
                         </ul>              
                     </div>
                 </div>
             </nav>
         </header>
-        
+
         <main class="container bg-grey mt-4">
             {% block content %}
             <!-- Content from child templates will be placed here -->
