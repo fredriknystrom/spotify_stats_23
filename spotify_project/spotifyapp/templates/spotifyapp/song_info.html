@@ -3,7 +3,7 @@
 {% block title %}Song Information: {{ song.title }}{% endblock %}
 
 {% block content %}
-<h1>{{ song.title }} 
+<h1 class="text-center">{{ song.title }} 
     - 
    {% if song.artists.all %}
        {% for artist in song.artists.all %}
@@ -14,39 +14,67 @@
    {% endif %}
 </h1>
 
-<div class="row">
-    <!-- Left Column (Table) -->
-    <div class="col-md-6">
-        <table class="table text-white bg-light-grey">
-            <tbody>
-                <tr>
-                    <td>Spotify Ranking</td>
-                    <td>#{{ song.in_spotify_charts }}</td>
-                </tr>
-                <tr>
-                    <td>Spotify Playlists</td>
-                    <td>{{ song.in_spotify_playlists }}</td>
-                </tr>
-                <tr>
-                    <td>Streams</td>
-                    <td>{{ song.streams }}</td>
-                </tr>
-                <tr>
-                    <td>BPM</td>
-                    <td>{{ song.bpm }}</td>
-                </tr>
-                <tr>
-                    <td>Release Date</td>
-                    <td>{{ song.released_date }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Right Column (Other Content) -->
-    <div class="col-md-6">
-        <!-- Add your other content here -->
-    </div>
-</div>
+        <ul class="list-group">
+            <li class="list-group-item bg-light-grey d-flex justify-content-between">
+                <span class="text-white no-underline">Spotify Ranking</span>
+                <span class="text-white no-underline">#{{ song.in_spotify_charts }}</span>
+            </li>
+            <li class="list-group-item bg-light-grey d-flex justify-content-between">
+                <span class="text-white no-underline">Spotify Playlists</span>
+                <span class="text-white no-underline">{{ song.in_spotify_playlists }}</span>
+            </li>
+            <li class="list-group-item bg-light-grey d-flex justify-content-between">
+                <span class="text-white no-underline">Streams</span>
+                <span class="text-white no-underline">{{ song.streams }}</span>
+            </li>
+            <li class="list-group-item bg-light-grey d-flex justify-content-between">
+                <span class="text-white no-underline">BPM</span>
+                <span class="text-white no-underline">{{ song.bpm }}</span>
+            </li>
+            <li class="list-group-item bg-light-grey d-flex justify-content-between">
+                <span class="text-white no-underline">Release Date</span>
+                <span class="text-white no-underline">{{ song.released_date }}</span>
+            </li>
+            <li class="list-group-item bg-light-grey d-flex justify-content-between">
+                <span class="text-white no-underline">Dance</span>
+                {% if song.danceability_percentage == 1 %}
+                    <span style="color: #FF6961">Low</span>
+                {% elif song.danceability_percentage == 2 %}
+                    <span style="color: #F8D66D">Medium</span>
+                {% elif song.danceability_percentage == 3 %}
+                    <span style="color: #8CD47E">High</span>
+                {% endif %}
+            </li>
+            <li class="list-group-item bg-light-grey d-flex justify-content-between">
+                <span class="text-white no-underline">Energy</span>
+                {% if song.energy_percentage == 1 %}
+                    <span style="color: #FF6961">Low</span>
+                {% elif song.energy_percentage == 2 %}
+                    <span style="color: #F8D66D">Medium</span>
+                {% elif song.energy_percentage == 3 %}
+                    <span style="color: #8CD47E">High</span>
+                {% endif %}
+            </li>
+            <li class="list-group-item bg-light-grey d-flex justify-content-between">
+                <span class="text-white no-underline">Acoustic</span>
+                {% if song.acousticness_percentage == 1 %}
+                    <span style="color: #FF6961">Low</span>
+                {% elif song.acousticness_percentage == 2 %}
+                    <span style="color: #F8D66D">Medium</span>
+                {% elif song.acousticness_percentage == 3 %}
+                    <span style="color: #8CD47E">High</span>
+                {% endif %}
+            </li>
+            <li class="list-group-item bg-light-grey d-flex justify-content-between">
+                <span class="text-white no-underline">Speech</span>
+                {% if song.speechiness_percentage == 1 %}
+                    <span style="color: #FF6961">Low</span>
+                {% elif song.speechiness_percentage == 2 %}
+                    <span style="color: #F8D66D">Medium</span>
+                {% elif song.speechiness_percentage == 3 %}
+                    <span style="color: #8CD47E">High</span>
+                {% endif %}
+            </li>
+        </ul>
 
 {% endblock %}

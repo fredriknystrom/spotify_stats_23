@@ -3,10 +3,9 @@
 {% block title %}Song Search{% endblock %}
 
 {% block content %}
-<h1>Song Search Page</h1>
+<h1 class="text-center">Song Search Page</h1>
 
 <form method="get" action="">
-    <!-- Modify your form to include filter parameters as hidden fields -->
     <input type="hidden" name="title" value="{{ filter.form.title.value }}">
     <input type="hidden" name="released_year_0" value="{{ filter.form.released_year_0.value }}">
     <input type="hidden" name="released_year_1" value="{{ filter.form.released_year_1.value }}">
@@ -44,16 +43,21 @@
     <button type="submit" class="btn btn-primary my-3">Search</button>
 </form>
 
-<div class="row">
-    <!-- Left Column -->
-    <div class="col-md-6">
         {% if songs %}
-        <h2>Song <span style="float: right;">Streams</span></h2>
+        <h2>Songs <span style="float: right;">Artists</span></h2>
         <ul class="list-group">
             {% for song in songs %}
             <li class="list-group-item bg-light-grey text-spotify-green d-flex justify-content-between">
                 <a class="text-white no-underline" href="{% url 'song-info' song.id %}">{{ song.title }}</a>
-                <span>{{ song.streams }}</span>
+                <span class="text-spotify-green">
+                    {% if song.artists.all %}
+                        {% for artist in song.artists.all %}
+                            <a class="text-spotify-green no-underline" href="{% url 'artist-info' artist.name %}">{{ artist.name }}</a>{% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    {% else %}
+                        No artists found
+                    {% endif %}
+                </span>
             </li>
             {% endfor %}
         </ul>
@@ -75,10 +79,4 @@
             </span>
         </div>
         {% endif %}
-    </div>
-    <!-- Right Column -->
-    <div class="col-md-6">
-        <h2>Right side</h2>
-    </div>
-</div>
 {% endblock %}

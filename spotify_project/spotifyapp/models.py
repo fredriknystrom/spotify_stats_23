@@ -14,6 +14,33 @@ class Artist(models.Model):
 
         return round(total/100000)
     
+    def avg_bpm(self):
+        total_bpm = 0
+        count = 0
+
+        # Iterate through the related SpotifyStats objects
+        for spotify_stat in self.spotifystats_set.all():
+            total_bpm += spotify_stat.bpm
+            count += 1
+
+        # Calculate the average BPM and handle division by zero
+        if count > 0:
+            average_bpm = total_bpm / count
+            return round(average_bpm)
+        else:
+            return 0 
+        
+    def in_playlists(self):
+        # Initialize a variable to store the total in_spotify_playlists count
+        total_playlists = 0
+
+        # Iterate through the related SpotifyStats objects
+        for spotify_stat in self.spotifystats_set.all():
+            total_playlists += spotify_stat.in_spotify_playlists
+
+        # Return the total count of in_spotify_playlists
+        return total_playlists
+    
     def low_medium_high_counts(self, field_name):
         # Initialize counters for low, medium, and high
         low_count = 0

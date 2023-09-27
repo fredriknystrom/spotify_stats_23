@@ -8,8 +8,7 @@ class ArtistFilter(django_filters.FilterSet):
         lookup_expr='istartswith',
         widget=forms.TextInput(
         attrs={ "class":"form-control",
-               "placeholder": "Enter artist here...",
-               "style": "width: 636px;"}
+               "placeholder": "Enter artist here..."}
         )
     )
 
